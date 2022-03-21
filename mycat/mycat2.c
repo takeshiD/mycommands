@@ -1,31 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(int argc, char **argv){
-    FILE *f;
+void _cat(FILE *f){
+    if(!f){
+        perror("FILE is null");
+        exit(1);
+    }
     int c;
+    while((c=fgetc(f)) != EOF){
+        if(fputc(c, stdout) == EOF) exit(1);
+    }
+}
+
+int main(int argc, char **argv){
     if(argc < 2){
-        f = stdin;
-        while(1){
-            c = fgetc(f);
-            if(c == EOF) break;
-            if(putchar(c) < 0) exit(1);
-        }
-        fclose(f);
-    }else{
+        _cat(stdin);
+    }
+    else{
+        FILE *f;
         for(int i=1; i<argc; i++){
             f = fopen(argv[i], "r");
-            if(!f){
-                perror(argv[i]);
-                exit(1);
-            }
-            while(1){
-                c = fgetc(f);
-                if(c == EOF) break;
-                if(putchar(c) < 0) exit(1);
-            }
+            _cat(f);
             fclose(f);
         }
     }
-    return 0;
 }
