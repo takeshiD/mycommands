@@ -1,7 +1,26 @@
 # mycat
-catの自作
 
-1. 指定ファイルから標準出力へ出力
-2. 指定ファイルが無いときは標準入力から読み込む
-3. `wc -l` と同じファイル行数をカウント出来るようにする `-n`でオプションに付ける
+## Options
+```sh
+-n --number
+    output number of lines
+-s --squeze-blank
+    suppress empty lines
+```
+
+## Usage Example
+```sh
+$ mycat sample.txt
+1234
+abcd
+$ mycat
+aaaa
+aaaa
+abcd
+abcd
+^C
+$ mycat -n sample.txt
+1 1234
+2 abcd
+```
 

@@ -27,10 +27,7 @@ static void do_cat(const int fd, const char *path){
 int main(int argc, char **argv){
     if(argc < 2){
         do_cat(STDIN_FILENO, "STDIN");
-    }else if(argc == 3){
-        ssize_t options = 0;
-        if(argv[1] == "-n"){
-
+    }else{
         int fd;
         for(int i=1; i<argc; i++){
             fd = open(argv[i], O_RDONLY);
